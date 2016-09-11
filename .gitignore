@@ -1,0 +1,6 @@
+.idea
+*.iml
+build
+node
+node_modules
+etc/
