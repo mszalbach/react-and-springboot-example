@@ -18,6 +18,12 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
     private List<Greeting> greetings = new ArrayList<>();
 
+    GreetingController() {
+        for(int i = 0; i < 1000; i++ ) {
+            greeting( "Test " + i );
+        }
+    }
+
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         Greeting greeting = new Greeting(counter.incrementAndGet(),
