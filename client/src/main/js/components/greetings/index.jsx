@@ -25,7 +25,10 @@ class Greetings extends React.Component {
 
 export default connect( ( props, context ) => {
     return {
-        fetch: `${context.url}/greetings`,
+        fetch: {
+            url: `${context.url}/greetings`,
+            refreshInterval: 60000
+        },
 
         refresh: () => ({
             fetch: {
