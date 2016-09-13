@@ -1,28 +1,30 @@
-import React, { Component } from 'react'
-import { connect, PromiseState } from 'react-refetch'
+import React, {Component, PropTypes} from 'react'
+import {connect, PromiseState} from 'react-refetch'
 
-class GreetingList extends Component {
+class GreetingList extends React.Component {
+
+    static contextTypes = {
+        url: PropTypes.string.isRequired,
+    }
+
     render() {
-        const { fetch } = this.props
+        const {fetch} = this.props;
 
-        if (fetch.pending) {
+        if ( fetch.pending ) {
             return <div>Loading</div>
-        } else if (fetch.rejected) {
-            return <div>ERROR: {userFetch.reason}</div>
-        } else if (fetch.fulfilled) {
+        } else if ( fetch.rejected ) {
+            return <div>ERROR: {fetch.reason}</div>
+        } else if ( fetch.fulfilled ) {
             return <ul>
                 {fetch.value.map( greeting =>
-                                              <li key={greeting.id}>{greeting.content}</li>
-
+                                          <li key={greeting.id}>{greeting.content}</li>
                 )}
 
             </ul>
         }
-
-        // similar for `likesFetch`
     }
 }
 
-export default connect(props => ({
-    fetch: `http://localhost:8081/greetings`
-}))(GreetingList)
+export default connect( ( props, context ) => ({
+    fetch: `${context.url}/greetings`
+}) )( GreetingList )
