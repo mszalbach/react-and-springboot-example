@@ -18,6 +18,7 @@ class GreetingList extends React.Component {
             return <ul>
                 {fetch.value.map( greeting =>
                                           <li key={greeting.id}>{greeting.content}</li>
+
                 )}
 
             </ul>
