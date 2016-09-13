@@ -1,39 +1,25 @@
 import React, {Component, PropTypes} from 'react'
 import {connect, PromiseState} from 'react-refetch'
 
-class GreetingForm extends React.Component {
-
-    static contextTypes = {
-        url: PropTypes.string.isRequired
-    }
+export default class GreetingForm extends React.Component {
 
     render() {
 
         return (<div>
             Greet
             <input id="name" type="text" name="greeting" defaultValue="Marcel"/>
-            <button onClick={() => this.handleClick()}>Greet!</button>
+            <button onClick={() => this.click()}>Greet!</button>
         </div>)
     }
 
-    handleClick() {
+    click() {
+        const {refresh, greet} = this.props;
         var name = document.getElementById( "name" ).value;
         console.log( name );
-        this.props.greet( name )
+        greet( name )
+        refresh()
     }
 
 
 }
-
-export default connect( ( props, context ) => {
-    return {
-        greet: name => ({
-            greetResponse: {
-                url: `${context.url}/greeting`,
-                method: 'POST',
-                body: name
-            }
-        })
-    }
-} )( GreetingForm )
 
