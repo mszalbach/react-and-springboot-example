@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {connect, PromiseState} from 'react-refetch'
+import React, {PropTypes} from 'react'
+import {connect} from 'react-refetch'
 import GreetingList from '../greetingList'
 import GreetingForm from '../greetingForm'
 
@@ -7,7 +7,7 @@ class Greetings extends React.Component {
 
     static contextTypes = {
         url: PropTypes.string.isRequired,
-    }
+    };
 
     render() {
 
@@ -18,12 +18,6 @@ class Greetings extends React.Component {
             <GreetingList greetingsRequest={fetch}/>
         </div> )
 
-
-    }
-
-    handleClick( name ) {
-        this.props.greet( name )
-        this.props.refresh()
 
     }
 

@@ -1,6 +1,4 @@
 import React, {PropTypes} from "react";
-import GreetingList from "components/greetingList";
-import GreetingForm from "components/greetingForm";
 import Greetings from "components/greetings";
 
 export default class App extends React.Component {
@@ -16,7 +14,6 @@ export default class App extends React.Component {
     }
 
     render() {
-
         return <div>
             <Greetings />
         </div>;

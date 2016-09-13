@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react'
-import {connect, PromiseState} from 'react-refetch'
+import React from 'react'
 
 export default class GreetingForm extends React.Component {
 
@@ -16,8 +15,8 @@ export default class GreetingForm extends React.Component {
         const {refresh, greet} = this.props;
         var name = document.getElementById( "name" ).value;
         console.log( name );
-        greet( name )
-        refresh()
+        greet( name );
+        refresh();
     }
 
 
