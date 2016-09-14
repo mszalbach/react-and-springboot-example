@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react'
 import {connect} from 'react-refetch'
 import GreetingList from '../greetingList'
 import GreetingForm from '../greetingForm'
+import Loading from '../loading'
+import Error from '../error'
 
 class Greetings extends React.Component {
 
@@ -13,9 +15,19 @@ class Greetings extends React.Component {
 
         const {fetch, refresh, greet} = this.props;
 
+        var greetingList;
+
+        if ( fetch.pending ) {
+            greetingList = <Loading />;
+        } else if ( fetch.rejected ) {
+            greetingList = <Error />;
+        } else if ( fetch.fulfilled ) {
+            greetingList = <GreetingList greetings={fetch.value}/>
+        }
+
         return (<div>
             <GreetingForm refresh={refresh} greet={greet}/>
-            <GreetingList greetingsRequest={fetch}/>
+            {greetingList}
         </div> )
 
 

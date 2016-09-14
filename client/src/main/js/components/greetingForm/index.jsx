@@ -14,7 +14,6 @@ export default class GreetingForm extends React.Component {
     click() {
         const {refresh, greet} = this.props;
         var name = document.getElementById( "name" ).value;
-        console.log( name );
         greet( name );
         refresh();
     }
