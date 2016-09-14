@@ -8,7 +8,6 @@
     "start": "webpack-dev-server --inline --hot",
     "test": "karma start"
   },
-
   "devDependencies": {
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",

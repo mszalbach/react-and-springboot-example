@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react'
-import {connect} from 'react-refetch'
-import GreetingList from '../greetingList'
-import GreetingForm from '../greetingForm'
-import Loading from '../loading'
-import Error from '../error'
+import React, {PropTypes} from "react";
+import {connect} from "react-refetch";
+import GreetingList from "../greetingList";
+import GreetingForm from "../greetingForm";
+import Loading from "../loading";
+import Error from "../error";
 
 class Greetings extends React.Component {
 
@@ -26,7 +26,7 @@ class Greetings extends React.Component {
         }
 
         return (<div>
-            <GreetingForm refresh={refresh} greet={greet}/>
+            <GreetingForm refresh={refresh} greet={greet} greeting="Marcel"/>
             {greetingList}
         </div> )
 
@@ -39,7 +39,7 @@ export default connect( ( props, context ) => {
     return {
         fetch: {
             url: `${context.url}/greetings`,
-            refreshInterval: 60000
+            refreshInterval: 500
         },
 
         refresh: () => ({
