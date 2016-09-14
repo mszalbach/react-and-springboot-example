@@ -18,13 +18,12 @@ export default class GreetingForm extends React.Component {
     }
 
     handleChange( event ) {
+        event.preventDefault();
         this.setState( {greeting: event.target.value} );
     }
 
     click() {
-        var {refresh, greet} = this.props;
-        greet( this.state.greeting );
-        refresh();
+        this.props.greet( this.state.greeting );
     }
 }
 

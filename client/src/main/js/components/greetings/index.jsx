@@ -1,61 +1,46 @@
 import React, {PropTypes} from "react";
-import {connect} from "react-refetch";
+import client from "rest";
 import GreetingList from "../greetingList";
 import GreetingForm from "../greetingForm";
-import Loading from "../loading";
-import Error from "../error";
 
-class Greetings extends React.Component {
 
-    static contextTypes = {
-        url: PropTypes.string.isRequired,
-    };
+const url = "http://localhost:8081";
+
+export default class Greetings extends React.Component {
+
+
+    constructor( props ) {
+        super( props );
+        this.state = {greetings: []};
+    }
+
+    componentDidMount() {
+        this.loadFromServer()
+    }
+
+    loadFromServer() {
+        client( {method: 'GET', path: url + '/greetings'} ).then( response => {
+            this.setState( {greetings: JSON.parse( response.entity )} );
+        } );
+    }
+
+    greet( greeting ) {
+        client( {
+                    method: 'POST',
+                    path: url + '/greeting',
+                    entity: greeting
+                } )
+        this.loadFromServer()
+    }
+
 
     render() {
-
-        const {fetch, refresh, greet} = this.props;
-
-        var greetingList;
-
-        if ( fetch.pending ) {
-            greetingList = <Loading />;
-        } else if ( fetch.rejected ) {
-            greetingList = <Error mesage={fetch.reason}/>;
-        } else if ( fetch.fulfilled ) {
-            greetingList = <GreetingList greetings={fetch.value}/>
-        }
-
         return (<div>
-            <GreetingForm refresh={refresh} greet={greet} greeting="Marcel"/>
-            {greetingList}
+            <GreetingForm greeting="Marcel" greet={( greeting ) => this.greet( greeting )}/>
+            <GreetingList greetings={this.state.greetings}/>
         </div> )
 
 
     }
 
 }
-
-export default connect( ( props, context ) => {
-    return {
-        fetch: {
-            url: `${context.url}/greetings`,
-            refreshInterval: 500
-        },
-
-        refresh: () => ({
-            fetch: {
-                url: `${context.url}/greetings`,
-                force: true,
-                refreshing: true
-            }
-        }),
-
-        greet: name => ({
-            greetResponse: {
-                url: `${context.url}/greeting`,
-                method: 'POST',
-                body: name
-            }
-        })
-    }
-} )( Greetings )
