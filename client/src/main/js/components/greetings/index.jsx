@@ -1,13 +1,9 @@
 import React, {PropTypes} from "react";
-import client from "rest";
+import client from "../../utils/client";
 import GreetingList from "../greetingList";
 import GreetingForm from "../greetingForm";
 
-
-const url = "http://localhost:8081";
-
 export default class Greetings extends React.Component {
-
 
     constructor( props ) {
         super( props );
@@ -19,15 +15,15 @@ export default class Greetings extends React.Component {
     }
 
     loadFromServer() {
-        client( {method: 'GET', path: url + '/greetings'} ).then( response => {
-            this.setState( {greetings: JSON.parse( response.entity )} );
+        client( {method: 'GET', path: '/greetings'} ).then( response => {
+            this.setState( {greetings: response.entity} );
         } );
     }
 
     greet( greeting ) {
         client( {
                     method: 'POST',
-                    path: url + '/greeting',
+                    path: '/greeting',
                     entity: greeting
                 } )
         this.loadFromServer()
