@@ -1,9 +1,11 @@
 import React from 'react'
+import './error.css';
 
-export default class Loading extends React.Component {
+export default class Error extends React.Component {
 
     render() {
-        return <div>ERROR: {fetch.reason}</div>
+        var {message} = this.props;
+        return <div className="error">ERROR: {message}</div>
     }
 
 }

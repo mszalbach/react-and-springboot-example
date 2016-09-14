@@ -20,7 +20,7 @@ class Greetings extends React.Component {
         if ( fetch.pending ) {
             greetingList = <Loading />;
         } else if ( fetch.rejected ) {
-            greetingList = <Error />;
+            greetingList = <Error mesage={fetch.reason}/>;
         } else if ( fetch.fulfilled ) {
             greetingList = <GreetingList greetings={fetch.value}/>
         }
