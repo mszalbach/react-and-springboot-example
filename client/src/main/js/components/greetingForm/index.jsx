@@ -1,4 +1,5 @@
 import React from "react";
+import {FormGroup, FormControl, Form, Button} from "react-bootstrap";
 
 export default class GreetingForm extends React.Component {
 
@@ -9,12 +10,15 @@ export default class GreetingForm extends React.Component {
 
     render() {
 
-        return (<div>
-            Greet
-            <input id="greeting" type="text" name="greeting" value={this.state.greeting}
-                   onChange={( event ) => this.handleChange( event )}/>
-            <button onClick={() => this.click()}>Greet!</button>
-        </div>)
+        return (
+                <Form inline>
+                    <FormGroup>
+                        <FormControl type="text" placeholder={this.state.greeting}
+                                     onChange={( event ) => this.handleChange( event )}/>
+                    </FormGroup>
+                    {' '}
+                    <Button onClick={() => this.click()}>Greet!</Button>
+                </Form>)
     }
 
     handleChange( event ) {

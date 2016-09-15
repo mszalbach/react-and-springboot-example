@@ -33,7 +33,12 @@ const common = {
     module: {
         loaders: [
             {test: /\.js[x]?$/, exclude: /node_modules/, loader: 'babel-loader'},
-            {test: /\.css$/, loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader' )}
+            {test: /\.css$/, loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader' )},
+            //needed for bootstrap
+            {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
         ]
     },
 

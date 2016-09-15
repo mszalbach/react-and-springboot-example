@@ -21,6 +21,8 @@
     "clean-webpack-plugin": "^0.1.10",
     "style-loader": "^0.13.1",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "url-loader": "^0.5.7",
     "extract-text-webpack-plugin": "^1.0.1",
     "karma": "^1.2.0",
     "karma-jasmine": "^1.0.2",
@@ -36,6 +38,8 @@
     "react-dom": "^15.3.1",
     "react-addons-update": "^15.3.1",
     "redux": "^3.3.1",
-    "rest": "^2.0.0"
+    "rest": "^2.0.0",
+    "react-bootstrap": "^0.30.3",
+    "bootstrap": "^3.3.7"
   }
 }
