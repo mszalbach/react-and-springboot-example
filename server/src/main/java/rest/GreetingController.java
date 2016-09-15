@@ -1,11 +1,10 @@
 package rest;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -53,6 +52,14 @@ public class GreetingController {
     public Greeting getGreeting( @PathVariable long id ) {
         return greetings.stream().filter( greeting -> greeting.getId() == id ).findFirst().get();
 
+    }
+
+
+
+    @DeleteMapping( "/greeting/{id}" )
+    public void deleteGreeting( @PathVariable long id ) {
+        Greeting greeting = getGreeting( id );
+        greetings.remove( greeting );
     }
 
 }

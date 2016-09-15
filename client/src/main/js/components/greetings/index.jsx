@@ -25,18 +25,24 @@ export default class Greetings extends React.Component {
                     method: 'POST',
                     path: '/greeting',
                     entity: greeting
-                } )
-        this.loadFromServer()
+                } ).then( response => {
+            this.loadFromServer()
+        } )
+
+    }
+
+    deleteFromServer( id ) {
+        client( {method: 'DELETE', path: '/greeting/' + id} ).then( response => {
+            this.loadFromServer()
+        } );
     }
 
 
     render() {
         return (<div>
             <GreetingForm greeting="Marcel" greet={( greeting ) => this.greet( greeting )}/>
-            <GreetingList greetings={this.state.greetings}/>
+            <GreetingList greetings={this.state.greetings} onDelete={( id ) => this.deleteFromServer( id )}/>
         </div> )
-
-
     }
 
 }
