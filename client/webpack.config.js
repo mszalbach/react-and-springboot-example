@@ -42,6 +42,7 @@ const common = {
         ]
     },
 
+
     plugins: [
         new ExtractTextPlugin( 'bundle.css' ),
         new HtmlWebpackPlugin( {

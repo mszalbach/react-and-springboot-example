@@ -1,18 +1,28 @@
-const testPattern = 'src/test/js/**/*Spec.js'
+var webpack = require( 'karma-webpack' );
+var webpackConfig = require( './webpack.config' );
+
+webpackConfig.externals = {
+    'cheerio': 'window',
+    'react/addons': true, // important!!
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+};
+
 module.exports = function ( config ) {
     config.set( {
-                    browsers: ['PhantomJS'],
                     frameworks: ['jasmine'],
                     files: [
-                        {pattern: testPattern, watched: false}
+                        './node_modules/phantomjs-polyfill/bind-polyfill.js',
+                        'src/test/**/*\.test.jsx'
                     ],
+                    browsers: ['PhantomJS'],
                     preprocessors: {
-                        testPattern: ['webpack']
+                        'src/test/**/*\.test.jsx': ['webpack'],
+                        'src/**/*.jsx': ['webpack']
                     },
-                    webpack: {},
 
-                    reporters: ['progress'],
+                    webpack: webpackConfig,
+                    webpackMiddleware: {noInfo: true},
                     singleRun: true
-
                 } );
 };
